@@ -1,0 +1,506 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard V.1 | Nalika - Material Admin Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- nalika Icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/nalika-icon.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+    <link rel="stylesheet" href="css/owl.transitions.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="css/calendar/fullcalendar.print.min.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+<script src="js/jquery.flot.js"  type="text/javascript"></script>
+<script src="js/jquery-1.12.0.min.js"  type="text/javascript"></script>
+<script type="text/javascript">			
+    $(document).ready(function(){
+    var d1 = [];
+    $.ajax({
+    url: '/RAM',
+    type: 'POST',
+    success: function (data) {
+            //d1 = data.info2;
+            d1.push([d1.length, data.info1[0]]);
+            console.log(data.info1[0]);
+            document.getElementById("memoria_utilizada").innerHTML =data.info1[3]+"MB";
+            document.getElementById("memoria_total").innerHTML =data.info1[1]+"MB";
+            document.getElementById("porcentaje_memoria").innerHTML =data.info1[2]+"%";
+        }
+    });            
+    $.plot($("#placeholder"), [ d1]);
+setInterval(function(){
+    var uso_cpu;
+    var valores=[];
+    $.ajax({
+    url: '/RAM',
+    type: 'POST',
+    success: function (data) {
+        uso_cpu = data.info1;
+        //valores = data.info2;
+            d1.push([d1.length, data.info1[0]]);
+            console.log(data.info1[0]);
+            //consele.log(data.info2.toString());
+            document.getElementById("memoria_utilizada").innerHTML =data.info1[3]+"MB";
+            document.getElementById("memoria_total").innerHTML =data.info1[1]+"MB";
+            document.getElementById("porcentaje_memoria").innerHTML =data.info1[2]+"%";
+        }
+    });           
+    $.plot($("#placeholder"), [d1]);
+}, 1000);
+window.onresize = function(event) {
+    $.plot($("#placeholder"), d1);
+}
+
+});
+</script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a class="has-arrow" href="index.html">
+								   <i class="icon nalika-home icon-wrap"></i>
+								   <span class="mini-click-non">Menu</span>
+								</a>
+                                <ul class="submenu-angle" aria-expanded="true">
+                                    <li><a title="Dashboard v.1" href="./home"><span class="mini-sub-pro">Procesos</span></a></li>
+                                    <li><a title="Dashboard v.2" href="./CPU"><span class="mini-sub-pro">CPU</span></a></li>
+                                    <li><a title="Dashboard v.3" href="./RAM"> <span class="mini-sub-pro">Memoria RAM</span></a></li>
+                                </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+													<i class="icon nalika-menu-task"></i>
+												</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                <li class="nav-item dropdown">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="icon nalika-mail" aria-hidden="true"></i><span class="indicator-ms"></span></a>
+                                                    <div role="menu" class="author-message-top dropdown-menu animated zoomIn">
+                                                        <div class="message-single-top">
+                                                            <h1>Message</h1>
+                                                        </div>
+                                                     
+                                                        <div class="message-view">
+                                                            <a href="#">View All Messages</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="icon nalika-alarm" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                                    <div role="menu" class="notification-author dropdown-menu animated zoomIn">
+                                                        <div class="notification-single-top">
+                                                            <h1>Notifications</h1>
+                                                        </div>
+                                                        <ul class="notification-menu">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="icon nalika-tick" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>Advanda Cro</h2>
+                                                                        <p>Please done this project as soon possible.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="icon nalika-cloud" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>Sulaiman din</h2>
+                                                                        <p>Please done this project as soon possible.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="icon nalika-folder" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>Victor Jara</h2>
+                                                                        <p>Please done this project as soon possible.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="icon nalika-bar-chart" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>Victor Jara</h2>
+                                                                        <p>Please done this project as soon possible.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="notification-view">
+                                                            <a href="#">View All Notification</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="icon nalika-menu-task"></i></a>
+
+                                                    <div role="menu" class="admintab-wrap menu-setting-wrap menu-setting-wrap-bg dropdown-menu animated zoomIn">
+                                                            <div id="Projects" class="tab-pane fade">
+                                                                <div class="projects-settings-wrap">
+                                                                    <div class="note-heading-indicate">
+                                                                        <h2><i class="icon nalika-happiness"></i> Recent Activity</h2>
+                                                                        <p> You have 20 Recent Activity.</p>
+                                                                    </div>
+                                                                    
+                                                            <div id="Settings" class="tab-pane fade">
+                                                                <div class="setting-panel-area">
+                                                                    <div class="note-heading-indicate">
+                                                                        <h2><i class="icon nalika-gear"></i> Settings Panel</h2>
+                                                                        <p> You have 20 Settings. 5 not completed.</p>
+                                                                    </div>
+                                                                    <ul class="setting-panel-list">
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Show notifications</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example">
+                                                                                            <label class="onoffswitch-label" for="example">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Disable Chat</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example3">
+                                                                                            <label class="onoffswitch-label" for="example3">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Enable history</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example4">
+                                                                                            <label class="onoffswitch-label" for="example4">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Show charts</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example7">
+                                                                                            <label class="onoffswitch-label" for="example7">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Update everyday</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" checked="" class="onoffswitch-checkbox" id="example2">
+                                                                                            <label class="onoffswitch-label" for="example2">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Global search</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" checked="" class="onoffswitch-checkbox" id="example6">
+                                                                                            <label class="onoffswitch-label" for="example6">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Offline users</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox" name="collapsemenu" checked="" class="onoffswitch-checkbox" id="example5">
+                                                                                            <label class="onoffswitch-label" for="example5">
+																									<span class="onoffswitch-inner"></span>
+																									<span class="onoffswitch-switch"></span>
+																								</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="product-sales-area mg-tb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="product-sales-chart">
+                            <div class="portlet-title">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="caption pro-sl-hd">
+                                            <span class="caption-subject text-uppercase"><b>Product Sales</b></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="actions graph-rp">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-grey active">
+													<input type="radio" name="options" class="toggle" id="option1" checked="">Today</label>
+                                                <label class="btn btn-grey">
+													<input type="radio" name="options" class="toggle" id="option2">Week</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="placeholder" style="width:600px;height:300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div id="placeholder" style="width:600px;height:300px;"></div>
+<div class="row">
+    <div class="col-xs-6 col-md-3">
+            <table>
+                <tr>
+                    <th>
+                        <h4>
+                            CANTIDAD DE MEMORIA UTILIZADA
+                        </h4>                                            
+                    </th>
+                    <th>
+                        <h4>
+                            MEMORIA TOTAL
+                        </h4>
+                        
+                    </th>
+                    <th>
+                        <h4>
+                            PORCENTAJE DE UTILIZACION
+                        </h4>
+                        
+                    </th>
+                </tr>
+                    <tr>
+                        <td>
+                            <h3 id="memoria_utilizada"></h3>
+                        </td>
+                        <td>
+                            <h3 id="memoria_total"></h3>
+                        </td>
+                        <td>
+                            <h3 id="porcentaje_memoria"></h3>
+                        </td>
+                    </tr>
+                </table>
+    </div>
+</div>
+    <!-- jquery
+		============================================ -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="js/metisMenu/metisMenu.min.js"></script>
+    <script src="js/metisMenu/metisMenu-active.js"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/sparkline/jquery.charts-sparkline.js"></script>
+    <!-- calendar JS
+		============================================ -->
+    <script src="js/calendar/moment.min.js"></script>
+    <script src="js/calendar/fullcalendar.min.js"></script>
+    <script src="js/calendar/fullcalendar-active.js"></script>
+	<!-- float JS
+		============================================ -->
+    <script src="js/flot/jquery.flot.js"></script>
+    <script src="js/flot/jquery.flot.resize.js"></script>
+    <script src="js/flot/curvedLines.js"></script>
+
+    <script src="js/flot/flot-active.js"></script>
+    <!-- plugins JS
+
+		============================================ -->
+    <script src="js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
